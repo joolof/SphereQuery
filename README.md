@@ -35,6 +35,7 @@ Once the query is done, if there are some results, they will be displayed in a T
 - DIT: will show the DITs used in the sequence. There can be multiple values (e.g., for F, C, O, or S)
 - Observing date: the dates of the fits file. There can be multiple dates if the observations was taken through midnight
 - Release date: when the data will become public
+- Number of fits files available for that row
 - DPR Tech: will show the kind of observations
 - Comments: if you double click on an entry, it will show a pop up window where you can add some comments.
 
@@ -100,7 +101,7 @@ On Ubuntu, I added a file `spherequery.desktop` in `$HOME/.local/share/applicati
 [Desktop Entry]
 Name=SphereQuery
 GenericName=SphereQuery
-Exec=python3 <path to the folder you downloaded>/SPHEREQuery/SPHEREQuery.py
+Exec=python3 <path to the folder you downloaded>/SphereQuery/SPHEREQuery.py
 Terminal=false
 Type=Application
 ```

@@ -4,7 +4,7 @@
 
 Package to browse and explore the ESO VLT/SPHERE archive. This should be the equivalent of searching from the official [ESO SPHERE form](http://archive.eso.org/wdb/wdb/eso/sphere/form) but the results should be presented in a more comprehensible way.
 
-Indeed, instead of having endless pages with one fits file per line, this package groups several fits files together, provided they have the same "OB id" which is provided by the observatory. Therefore, at a quick glance, you can see how many time your favorite star has been observed with SPHERE, in which observing mode, and with which filters.
+Indeed, instead of having endless pages with one fits file per line, this package groups several fits files together, provided they have the same "OB id" which is given by the observatory. Therefore, at a quick glance, you can see how many times your favorite star has been observed with SPHERE, in which observing mode, and with which filters.
 
 Note that at the moment, only **IRDIS** is supported, I will include IFS and ZIMPOL in the near future.
 
@@ -45,12 +45,12 @@ Preferences can be accessed by clicking on the `Preferences` button in the upper
 The package will create a directory in $HOME/.config/spherequery/, meaning that all preferences are stored locally and will stay on your computer. There should be at maximum three files that are saved there:
 
 - spherequery.conf: where your login and password for the ESO archive are stored. Again, this is saved locally and remains private. There is also a section on where to download the data.
-- comments.csv: to save the comments that you enter from the main interace. Saved with a ";" separator, so try to avoid comments using a ":"
-- resolved_names.csv: when displaying a query, the code will take the "OBJECT" field and query Simbad to find the main identifier. To avoid doing that every times, the package will save the result in that file to speed up the display over time.
+- comments.csv: to save the comments that you enter from the main interace. It is a comma-separated file, using a ";" as the separator, so try to avoid using ";" when writing comments.
+- resolved_names.csv: when displaying the results of a query, the code will take the "OBJECT" field from the headers and will query Simbad to find the main identifier. To avoid doing that every time, the package will save the result of the Simbad query in that file to speed up the display over time.
 
 ## Data download
 
-After doing one query, you can highlight one of the row and press the `Download` button. There will be a pop-up window showing up where you can access the `Preferences` in case you need to change the download directory, and you can also select the kind of data you want. You can select from the following three options:
+After doing one query, you can select one of the row and press the `Download` button. There will be a pop-up window showing up where you can access the `Preferences` in case you need to change the download directory, and you can also select the kind of data you want. You can select from the following three options:
 
 - Science files only
 - Science and raw calibration files
@@ -89,6 +89,25 @@ scikit_learn==1.2.2
 vlt_sphere==1.5.1
 
 ```
+
+## Operating systems and such
+
+This package has only been tested on Linux, I have not idea if/how it will work on MacOS or Windows.
+
+On Ubuntu, I added a file `spherequery.desktop` in `$HOME/.local/share/applications` containing the following:
+
+```
+[Desktop Entry]
+Name=SphereQuery
+GenericName=SphereQuery
+Exec=python3 <path to the folder you downloaded>/SPHEREQuery/SPHEREQuery.py
+Terminal=false
+Type=Application
+```
+
+This should allow to start the application from your favorite launcher.
+
+Otherwise, you can go to the folder where you downloaded this repository and start it using `python3 SPHEREQuery.py`.
 
 ## TODO
 

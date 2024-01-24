@@ -29,7 +29,7 @@ class DoQuery(QObject):
         """
         super(DoQuery, self).__init__(parent)
         self.starname, self.progid, self.dprtech, self.insfilt = '', '', '', ''
-        self.drot, self.startdate, self.endate  = '', '', ''
+        self.drot, self.startdate, self.enddate  = '', '', ''
         self.obinfo = []
 
     def _set_status(self, text):

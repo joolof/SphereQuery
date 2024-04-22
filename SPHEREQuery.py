@@ -100,7 +100,10 @@ class QueryWindow(QWidget):
 
     def _read_comments(self, update = False):
         filename = str(Path.home()) + '/.config/spherequery/comments.csv'
-        self.comments = ascii.read(filename, data_start = 1, delimiter = ';')
+        if Path(filename).exists():
+            self.comments = ascii.read(filename, data_start = 1, delimiter = ';')
+        else:
+            self.comments = None
         if update:
             self._update_table(self.results)
 
@@ -466,12 +469,15 @@ class QueryWindow(QWidget):
 
     def _find_comment(self, starname, obsnight, ob_id):
         obsnight = obsnight.split('\n')[0]
-        mask = (self.comments['starname'] == starname) & (self.comments['obsnight'] == obsnight) & (self.comments['ob_id'] == ob_id)
-        if len(self.comments[mask]) != 0:
-            ind = mask.nonzero()[0][0]
-            return self.comments['comment'][ind]
+        if self.comments is None:
+            return ""
         else:
-            return ''
+            mask = (self.comments['starname'] == starname) & (self.comments['obsnight'] == obsnight) & (self.comments['ob_id'] == ob_id)
+            if len(self.comments[mask]) != 0:
+                ind = mask.nonzero()[0][0]
+                return self.comments['comment'][ind]
+            else:
+                return ''
 
     def _update_table(self, results):
         """
